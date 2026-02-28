@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Noto+Sans+TC:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="gamenav.css">
+  <title>海洋消消樂</title>
+  <link rel="icon" href="../logo.PNG">
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 30px;
+      /* 上方空間 */
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    #scoreboard {
+      width: 520px;
+      /* 或你需要的寬度 */
+      display: flex;
+      justify-content: space-between;
+      /* 三者平均分布 */
+      align-items: center;
+      /* 垂直置中 */
+      font-size: 20px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+      margin-bottom: 15px;
+    }
+
+    #mission {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 18px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    #bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(to bottom,
+          #6ad6ff 0%,
+          #2ba0ff 35%,
+          #0b4fa3 100%);
+    }
+
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      animation: rise 6s linear infinite;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(500px) scale(0.5);
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translateY(-50px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    h1 {
+      color: #fff;
+      text-shadow: 2px 2px 8px rgba(0, 0, 50, 0.5);
+      margin-bottom: 5px;
+    }
+
+
+    #grid {
+      position: relative;
+      width: calc(80px * 8);
+      /* 640px */
+      height: calc(80px * 8);
+      /* 640px */
+      background: linear-gradient(to bottom,
+          rgba(255, 255, 255, 0.12),
+          rgba(0, 80, 160, 0.15));
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 50, 0.35);
+      transition: transform .6s ease, opacity .6s ease;
+
+      margin-bottom: 40px;
+      /* 與頁面底部保持距離 */
+    }
+
+
+    #grid::before {
+      content: "";
+      position: absolute;
+      width: 640px;
+      height: 640px;
+      box-shadow:
+        60px 0 0 rgba(255, 255, 255, .1),
+        120px 0 0 rgba(255, 255, 255, .1),
+        180px 0 0 rgba(255, 255, 255, .1),
+        240px 0 0 rgba(255, 255, 255, .1),
+        300px 0 0 rgba(255, 255, 255, .1),
+        360px 0 0 rgba(255, 255, 255, .1),
+        420px 0 0 rgba(255, 255, 255, .1),
+        0 60px 0 rgba(255, 255, 255, .1),
+        0 120px 0 rgba(255, 255, 255, .1),
+        0 180px 0 rgba(255, 255, 255, .1),
+        0 240px 0 rgba(255, 255, 255, .1),
+        0 300px 0 rgba(255, 255, 255, .1),
+        0 360px 0 rgba(255, 255, 255, .1),
+        0 420px 0 rgba(255, 255, 255, .1);
+      pointer-events: none;
+    }
+
+    .emoji {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      transition: top .3s ease, left .3s ease, box-shadow .6s ease;
+      border-radius: 12px;
+      text-shadow: 0 1px 2px rgba(0, 0, 50, 0.5);
+    }
+
+    .target-glow {
+      animation: glowPulse 1.5s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      0% {
+        box-shadow: 0 0 6px 3px rgba(0, 200, 255, 0.3);
+      }
+
+      100% {
+        box-shadow: 0 0 12px 6px rgba(0, 200, 255, 0.5);
+      }
+    }
+
+    .cleared {
+      opacity: 0;
+      transform: scale(.5);
+      transition: .3s;
+    }
+
+    /* ====== 全螢幕過場 ====== */
+    /* === 過場文字容器 === */
+    #transition-text {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      text-shadow: 2px 2px 10px rgba(0, 0, 50, 0.7);
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    /* 小副標 */
+    #transition-text span {
+      font-size: 22px;
+      margin-top: 8px;
+      font-weight: normal;
+      opacity: .9;
+    }
+
+    #level-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateY(100%);
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 1;
+      /* 之後我們會用 JS 控制淡出 */
+      transition: opacity .8s ease;
+      /* 讓淡出自然 */
+    }
+
+
+    #water-bg {
+      position: absolute;
+      bottom: -5%;
+      /* 讓邊緣看得到一點 */
+      left: 0;
+      width: 100%;
+      height: 105%;
+      /* 稍微多一點點高度 */
+      background: linear-gradient(to bottom,
+          #6ad6ff 0%,
+          #2ba0ff 40%,
+          #0b4fa3 100%);
+    }
+
+
+
+    #overlay {
+      position: absolute;
+      width: 640px;
+      height: 640px;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #fff;
+      border-radius: 20px;
+      pointer-events: none;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform .6s ease, opacity .6s ease;
+      text-shadow: 2px 2px 8px rgba(0, 0, 50, 0.5);
+    }
+
+    #start-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, #5dd5f5, #1e90ff);
+      /* 海洋背景 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-family: 'Noto Sans', sans-serif;
+      transition: opacity .8s ease;
+      /* 🔹 新增：讓它可以淡出 */
+    }
+
+    #start-screen.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #start-screen h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 50, 0.5);
+    }
+
+    #start-title {
+      font-family: 'Comfortaa', 'Noto Sans TC', sans-serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: #e8f7ff;
+      letter-spacing: 2px;
+      text-align: center;
+      position: relative;
+      filter: url(#waterWave);
+      /* 保留你的水波扭動 */
+
+      /* —— 關鍵：藍色水光陰影 —— */
+      text-shadow:
+        0 0 8px rgba(96, 198, 255, 0.6),
+        /* 內層柔光 */
+        0 0 15px rgba(52, 152, 219, 0.5),
+        /* 中層藍光 */
+        0 0 25px rgba(41, 128, 185, 0.35),
+        /* 外層擴散光 */
+        0 4px 10px rgba(0, 40, 80, 0.4);
+      /* 底部水影 */
+
+      animation: floatTitle 3s ease-in-out infinite;
+    }
+
+    /* 輕微漂浮（像水面） */
+    @keyframes floatTitle {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+
+    #rules-container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px 30px;
+      border-radius: 20px;
+      max-width: 400px;
+      text-align: left;
+      /* 🔹 左對齊 */
+      margin-bottom: 40px;
+      box-shadow: 0 5px 15px rgba(0, 0, 50, 0.3);
+    }
+
+    #rules-container p {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    #rules-container ul {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    #rules-container li {
+      margin-bottom: 8px;
+    }
+
+    #start-btn {
+      padding: 15px 40px;
+      font-size: 24px;
+      border: none;
+      border-radius: 12px;
+      background: #00bfff;
+      color: #fff;
+      cursor: pointer;
+      transition: all .3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 50, 0.4);
+    }
+
+    #start-btn:hover {
+      background: #0099cc;
+      transform: scale(1.05);
+    }
+
+    #finish-screen {
+      position: fixed;
+      /* 🔹 固定全螢幕 */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 50, 0.85);
+      /* 半透明深海色 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      /* 🔹 確保在最上層 */
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 36px;
+    }
+
+    #finish-screen h2 {
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 50, 0.7);
+    }
+
+    #finish-screen button {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 24px;
+      border: none;
+      border-radius: 12px;
+      background: #00bfff;
+      color: #fff;
+      cursor: pointer;
+      transition: all .3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 50, 0.4);
+    }
+
+    #finish-screen button:hover {
+      background: #0099cc;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="logo-container">
+    <img src="../logo.PNG" alt="Logo" id="logo-img">
+    <span id="logo-text">海洋消消樂</span>
+  </div>
+
+  <div class="ui-top">
+    <button id="settingsBtn" class="glass-btn settings-btn"></button>
+
+    <button id="menuBtn" class="hamburger glass-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- 側邊遮罩 -->
+  <div id="menuOverlay"></div>
+
+  <!-- 側邊選單 -->
+  <div id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="../index.html">首頁</a></li>
+      <li><a href="../marine/Marine.html">海洋生態</a></li>
+      <li><a href="../trash/Trash.html">海洋垃圾</a></li>
+      <li><a href="../goods/Good.html">環保商品</a></li>
+      <li><a href="../volunteer/Volunteer.html">志工</a></li>
+      <li>
+        <a href="../game/Trash-Game.html" class="active">
+          <img src="../game.PNG" class="menu-icon">
+          海洋消消樂
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+  <!-- 設定選單 -->
+  <div id="settingsMenu" class="settings-menu glass-btn">
+    <button id="switchModeBtn">切換：關卡 / 無盡</button>
+    <button id="exitBtn">退出遊戲</button>
+  </div>
+
+
+
+  <svg width="0" height="0">
+    <filter id="waterWave">
+      <feTurbulence type="fractalNoise" baseFrequency="0.01 0.02" numOctaves="2" seed="2">
+        <animate attributeName="baseFrequency" dur="6s" values="0.01 0.02; 0.02 0.03; 0.01 0.02"
+          repeatCount="indefinite" />
+      </feTurbulence>
+
+      <feDisplacementMap in="SourceGraphic" scale="6" />
+    </filter>
+  </svg>
+
+  <div id="bg"></div>
+
+  <div id="level-transition">
+    <div id="water-bg"></div>
+
+    <div id="transition-text">
+      <div id="transition-title"></div>
+      <span id="transition-sub"></span>
+    </div>
+  </div>
+
+  <div id="start-screen">
+    <div id="start-title">海洋消消樂</div>
+    <h2>🌊 開始清理海洋垃圾！</h2>
+
+    <div id="rules-container">
+      <p>規則：</p>
+      <ul>
+        <li>拖動相鄰的垃圾交換位置，連成 3 個以上即可消除。</li>
+        <li>本關目標垃圾會發光，消除指定數量即可過關。</li>
+        <li>完成所有關卡，保護海洋！</li>
+      </ul>
+    </div>
+
+    <button id="start-btn" onclick="startGame()">開始遊戲</button>
+  </div>
+
+
+  <div id="finish-screen" style="display:none">
+    <h2>🎉 恭喜完成所有關卡！</h2>
+    <div>
+      <button onclick="restart()">重玩</button>
+      <button onclick="endlessMode()">無境模式</button>
+    </div>
+  </div>
+
+  <header>
+    <div id="scoreboard">
+      <div>分數：<span id="score">0</span></div>
+      <div id="mission">
+        目標：<span id="target"></span>　
+        剩餘：<span id="remain"></span>
+      </div>
+      <div>關卡：<span id="level">1</span></div>
+    </div>
+  </header>
+
+  <main>
+    <div id="grid">
+      <div id="overlay"></div>
+    </div>
+  </main>
+
+
+  <script>
+    const types = [
+      './trash-bottle.png',
+      './trash-plastic.png',
+      './trash-rubber.png',
+      './trash-paper.png',
+      './trash-metal.png',
+      './trash-styrofoam.png'
+    ];
+    const gridSize = 8;
+    const cellSize = 80;
+
+    // 🔹【已調小目標數量】
+    const levels = [
+      { target: './trash-bottle.png', goal: 8 },
+      { target: './trash-plastic.png', goal: 10 },
+      { target: './trash-paper.png', goal: 12 }
+    ];
+
+    let currentLevel = 0;
+    let remain = 0;
+    let grid = [];
+    let score = 0;
+    let animating = false;
+    let drag = null;
+    let endless = false;
+    let levelClearing = false; // 🔹 新增：防止連跳關
+
+    const gridEl = document.getElementById('grid');
+    const overlay = document.getElementById('overlay');
+    const finishScreen = document.getElementById('finish-screen');
+    const transitionScreen = document.getElementById('level-transition');
+
+    // 泡泡
+    for (let i = 0; i < 20; i++) {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      b.style.left = `${Math.random() * 640}px`;
+      b.style.width = `${Math.random() * 16 + 10}px`;
+      b.style.height = b.style.width;
+      b.style.animationDuration = `${5 + Math.random() * 4}s`;
+      b.style.animationDelay = `${Math.random() * 5}s`;
+      gridEl.appendChild(b);
+    }
+
+    function startGame() {
+      const startScreen = document.getElementById('start-screen');
+
+      // 👉 整個開場頁「含標題」一起淡出
+      startScreen.classList.add('fade-out');
+
+      // 0.8 秒後真正隱藏
+      setTimeout(() => {
+        startScreen.style.display = 'none';
+      }, 800);
+
+      // 初始化遊戲
+      currentLevel = 0;
+      endless = false;
+      score = 0;
+      document.getElementById('score').textContent = score;
+      initLevel();
+    }
+
+
+
+    function randomType() {
+      return types[Math.floor(Math.random() * types.length)];
+    }
+
+    function initLevel() {
+      remain = levels[currentLevel].goal;
+      document.getElementById('level').textContent = currentLevel + 1;
+      document.getElementById('target').innerHTML = `<img src="${levels[currentLevel].target}" style="width:36px;height:36px;vertical-align:middle;">`;
+      document.getElementById('remain').textContent = remain;
+
+      // 🔹 背景深度改變
+      const topLight = Math.max(90, 106 - currentLevel * 8);   // 上方變暗
+      const midBlue = Math.max(60, 160 - currentLevel * 10);   // 中間變深
+      const deepBlue = Math.max(20, 79 - currentLevel * 8);    // 下方更深
+
+      const bgGradient = `linear-gradient(
+  to bottom,
+  rgb(106, ${topLight}, 255) 0%,
+  rgb(43, ${midBlue}, 255) 35%,
+  rgb(11, ${deepBlue}, 163) 100%
+)`;
+
+      document.body.style.background = bgGradient;
+      document.getElementById('bg').style.background = bgGradient;
+
+
+      gridEl.querySelectorAll('.emoji').forEach(e => e.remove());
+      initGrid();
+      renderGrid();
+    }
+
+
+    function initGrid() {
+      grid = [];
+      for (let i = 0; i < gridSize; i++) {
+        grid[i] = [];
+        for (let j = 0; j < gridSize; j++) {
+          let t;
+          do { t = randomType(); }
+          while (
+            (j >= 2 && t === grid[i][j - 1] && t === grid[i][j - 2]) ||
+            (i >= 2 && t === grid[i - 1][j] && t === grid[i - 2][j])
+          );
+          grid[i][j] = t;
+        }
+      }
+    }
+
+    function renderGrid() {
+      gridEl.querySelectorAll('.emoji').forEach(e => e.remove());
+      for (let i = 0; i < gridSize; i++) {
+        for (let j = 0; j < gridSize; j++) {
+          createEmoji(i, j, grid[i][j]);
+        }
+      }
+    }
+
+    function createEmoji(i, j, val) {
+      const e = document.createElement('div');
+      e.className = 'emoji';
+      e.dataset.row = i;
+      e.dataset.col = j;
+      e.style.top = i * cellSize + 'px';
+      e.style.left = j * cellSize + 'px';
+
+      // 🔹 這裡改成圖片
+      const img = document.createElement('img');
+      img.src = val;              // 直接用 types 裡的路徑
+      img.style.width = '56px';
+      img.style.height = '56px';
+
+      img.style.pointerEvents = 'none'; // 讓拖動的是外層 div
+
+      e.appendChild(img);
+
+      if (!endless && val === levels[currentLevel].target)
+        e.classList.add('target-glow');
+
+      gridEl.appendChild(e);
+
+      e.onmousedown = ev => {
+        if (animating) return;
+        drag = {
+          el: e,
+          startX: ev.clientX,
+          startY: ev.clientY,
+          r: i,
+          c: j
+        };
+      };
+    }
+
+
+    document.onmousemove = ev => {
+      if (!drag) return;
+      drag.el.style.transform =
+        `translate(${ev.clientX - drag.startX}px,${ev.clientY - drag.startY}px)`;
+    };
+
+    document.onmouseup = ev => {
+      if (!drag) return;
+      const dx = ev.clientX - drag.startX;
+      const dy = ev.clientY - drag.startY;
+      let r2 = drag.r, c2 = drag.c;
+
+      if (Math.abs(dx) > Math.abs(dy)) {
+        if (dx > 30 && c2 < 7) c2++;
+        if (dx < -30 && c2 > 0) c2--;
+      } else {
+        if (dy > 30 && r2 < 7) r2++;
+        if (dy < -30 && r2 > 0) r2--;
+      }
+
+      drag.el.style.transform = '';
+      if (r2 !== drag.r || c2 !== drag.c) swap(drag.r, drag.c, r2, c2);
+      drag = null;
+    };
+
+    function swap(r1, c1, r2, c2) {
+      animating = true;
+      [grid[r1][c1], grid[r2][c2]] = [grid[r2][c2], grid[r1][c1]];
+      renderGrid();
+
+      setTimeout(() => {
+        if (!checkMatches()) {
+          [grid[r1][c1], grid[r2][c2]] = [grid[r2][c2], grid[r1][c1]];
+          renderGrid();
+          animating = false;
+        } else {
+          dropAndFill();
+        }
+      }, 200);
+    }
+
+    function checkMatches() {
+      let found = false;
+      let clear = [];
+
+      for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 6; j++) {
+          if (grid[i][j] && grid[i][j] == grid[i][j + 1] && grid[i][j] == grid[i][j + 2])
+            clear.push([i, j], [i, j + 1], [i, j + 2]);
+        }
+      }
+
+      for (let j = 0; j < 8; j++) {
+        for (let i = 0; i < 6; i++) {
+          if (grid[i][j] && grid[i][j] == grid[i + 1][j] && grid[i][j] == grid[i + 2][j])
+            clear.push([i, j], [i + 1, j], [i + 2, j]);
+        }
+      }
+
+      [...new Set(clear.map(JSON.stringify))].map(JSON.parse).forEach(([i, j]) => {
+        if (!endless && grid[i][j] === levels[currentLevel]?.target) {
+          remain--;
+          document.getElementById('remain').textContent = Math.max(remain, 0);
+        }
+        // 🔹 無盡模式計分
+        if (endless && grid[i][j] != '') {
+          score += 10; // 每消一個垃圾 10 分
+          document.getElementById('score').textContent = score;
+        }
+        grid[i][j] = '';
+        found = true;
+
+        const e = Array.from(gridEl.querySelectorAll('.emoji')).find(em => {
+          return parseInt(em.dataset.row) === i && parseInt(em.dataset.col) === j;
+        });
+
+        if (e) e.classList.add('cleared');
+      });
+
+
+
+      return found;
+    }
+
+    function dropAndFill() {
+      animating = true;
+      document.querySelectorAll('.cleared').forEach(e => e.remove());
+
+      const emojis = Array.from(gridEl.querySelectorAll('.emoji'));
+
+      for (let j = 0; j < gridSize; j++) {
+        let empty = 0;
+
+        for (let i = gridSize - 1; i >= 0; i--) {
+          if (grid[i][j] == '') empty++;
+          else if (empty > 0) {
+            const e = emojis.find(em => parseInt(em.dataset.row) === i && parseInt(em.dataset.col) === j);
+            grid[i + empty][j] = grid[i][j];
+            grid[i][j] = '';
+
+            if (e) {
+              e.dataset.row = i + empty;
+              e.style.top = `${(i + empty) * cellSize}px`;
+            }
+          }
+        }
+
+        for (let i = 0; i < empty; i++) {
+          const val = randomType();
+          grid[i][j] = val;
+
+          const e = document.createElement('div');
+          e.className = 'emoji';
+          e.dataset.row = i;
+          e.dataset.col = j;
+
+          const img = document.createElement('img');
+          img.src = val;
+          img.style.width = '56px';
+          img.style.height = '56px';
+          img.style.pointerEvents = 'none';
+
+          e.appendChild(img);
+
+          // 🔹 先放在格子上方，讓掉落動畫可見
+          e.style.top = `${-cellSize * (empty - i)}px`;
+          e.style.left = `${j * cellSize}px`;
+
+          gridEl.appendChild(e); // 🔹 忘記加這行就不會出現
+
+          // 🔹 添加掉落動畫（淡入 + 滑下 + 一點彈性）
+          requestAnimationFrame(() => {
+            e.style.transition = 'top 0.5s cubic-bezier(.25,.8,.25,1), opacity 0.3s ease';
+            e.style.top = `${i * cellSize}px`;
+            e.style.opacity = '1';
+          });
+
+          e.addEventListener('mousedown', ev => {
+            if (animating) return;
+            drag = {
+              el: e,
+              startX: ev.clientX,
+              startY: ev.clientY,
+              r: i,
+              c: j
+            };
+          });
+
+          if (!endless && val === levels[currentLevel].target)
+            e.classList.add('target-glow');
+        }
+      }
+
+
+      setTimeout(() => {
+        if (checkMatches()) {
+          dropAndFill();
+        } else {
+          animating = false;
+
+          // ✅【重點：全部掉落補滿結束後，再判斷是否過關】
+          if (!endless && remain <= 0 && !levelClearing) {
+            setTimeout(() => {
+              nextLevel();
+            }, 400); // ← 讓畫面「呼吸一下」再過場
+          }
+        }
+      }, 350);
+    }
+
+    // 🔹【已修正：確保只跳一關】
+    function nextLevel() {
+      if (levelClearing) return;
+      levelClearing = true;
+
+      const transition = document.getElementById('level-transition');
+      const textBox = document.getElementById('transition-text');
+      const title = document.getElementById('transition-title');
+      const sub = document.getElementById('transition-sub');
+
+      title.textContent = `第 ${currentLevel + 1} 關 清理完成`;
+      sub.textContent = "海洋水質提升中... 🌊";
+
+      // 先重置狀態
+      textBox.style.opacity = '0';
+      textBox.style.transform = 'translateY(30px) scale(0.95)';
+      transition.style.opacity = '1';
+
+      // ✅【1】水從下往上（跟你原本一樣）
+      transition.style.transition = 'transform 1.4s cubic-bezier(0.33, 0.96, 0.64, 1)';
+      transition.style.transform = 'translateY(0)';
+
+      // ✅【2】稍微慢一點再顯示文字（讓畫面更沉穩）
+      setTimeout(() => {
+        textBox.style.opacity = '1';
+        textBox.style.transform = 'translateY(0) scale(1)';
+      }, 700);   // ← 你可以再跟我說要不要更慢
+
+      // ✅【3】「停久一點點」再結束過場
+      setTimeout(() => {
+
+        // 🔹【淡出開始】
+        transition.style.transition = 'opacity .8s ease';
+        transition.style.opacity = '0';
+
+        // 🔹【✨重點：這裡「同步」切換關卡，不等淡出結束】
+        if (currentLevel >= levels.length - 1) {
+          finishScreen.style.display = 'flex';
+        } else {
+          currentLevel++;
+          initLevel();
+        }
+
+        // 🔹【淡出結束後，再偷偷重置過場位置】
+        setTimeout(() => {
+          transition.style.transition = 'none';
+          transition.style.transform = 'translateY(100%)';
+          transition.style.opacity = '1';
+
+          levelClearing = false;
+        }, 900);
+
+
+      }, 2300); // ← 👉【這個數字決定「停留多久」】
+    }
+
+
+
+
+    function restart() {
+      finishScreen.style.display = 'none';
+      currentLevel = 0;
+      endless = false;
+      score = 0;
+      document.getElementById('score').textContent = score;
+      initLevel();
+    }
+
+    function endlessMode() {
+      finishScreen.style.display = 'none';
+      endless = true;
+      score = 0;
+      document.getElementById('score').textContent = score;
+      currentLevel = 0;
+      remain = 9999;
+      document.getElementById('target').textContent = '隨機';
+      document.getElementById('remain').textContent = '∞';
+
+      gridEl.querySelectorAll('.emoji').forEach(e => e.remove());
+      initGrid();
+      renderGrid();
+
+    }
+
+    // ====== UI 元素 ======
+    const menuBtn = document.getElementById('menuBtn');           // Hamburger
+    const sideMenu = document.getElementById('sideMenu');         // 側邊選單
+    const menuOverlay = document.getElementById('menuOverlay');   // 遮罩
+    const settingsBtn = document.getElementById('settingsBtn');   // 設定按鈕
+    const settingsMenu = document.getElementById('settingsMenu'); // 設定選單
+    const exitBtn = document.getElementById('exitBtn');           // 退出遊戲按鈕
+    const switchModeBtn = document.getElementById('switchModeBtn'); // 關卡/無盡切換
+
+    // ====== Hamburger：旋轉 + 側邊選單滑入 ======
+    menuBtn.addEventListener('click', () => {
+      menuBtn.classList.toggle('active');           // 旋轉動畫
+      sideMenu.classList.toggle('open');           // 側邊選單滑入
+      menuOverlay.style.display = sideMenu.classList.contains('open') ? 'block' : 'none'; // 顯示遮罩
+    });
+
+    // 點遮罩關閉選單
+    menuOverlay.addEventListener('click', () => {
+      sideMenu.classList.remove('open');
+      menuBtn.classList.remove('active');
+      menuOverlay.style.display = 'none';
+    });
+
+    // ====== 設定按鈕：開關設定選單 ======
+    settingsBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // ⭐ 防止事件冒泡導致立刻關閉
+      settingsMenu.classList.toggle('show');
+    });
+
+    // ====== 點擊設定選單本身不關閉 ======
+    settingsMenu.addEventListener('click', (e) => {
+      e.stopPropagation(); // ⭐ 防止點到選單內被當成點外面
+    });
+
+    // ====== 點擊畫面其他地方關閉設定選單 ======
+    document.addEventListener('click', () => {
+      settingsMenu.classList.remove('show');
+    });
+
+    // ====== 設定選單按鈕：切換模式 ======
+    switchModeBtn.addEventListener('click', () => {
+      settingsMenu.classList.remove('show'); // 點擊後自動收起設定選單
+
+      if (!endless) {
+        // 切到無盡模式
+        endlessMode();
+      } else {
+        // 切回關卡模式
+        endless = false;
+        currentLevel = 0;
+        score = 0;
+        document.getElementById('score').textContent = score;
+        initLevel();
+      }
+    });
+
+    // ====== 設定選單按鈕：退出遊戲回開始畫面 ======
+    exitBtn.addEventListener('click', () => {
+      settingsMenu.classList.remove('show');
+
+      const startScreen = document.getElementById('start-screen');
+      startScreen.style.display = 'flex';
+
+      // 小延遲讓 CSS transition 生效
+      setTimeout(() => {
+        startScreen.classList.remove('fade-out');
+      }, 10);
+    });
+
+  </script>
+</body>
+
+</html>

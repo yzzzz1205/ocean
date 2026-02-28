@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海洋生態</title>
+    <link rel="icon" href="../logo.PNG">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="nav.css">
+</head>
+
+<body>
+    <div class="ocean-bg"></div>
+    <!-- ===== See More Modal ===== -->
+    <div id="ecoModal" class="eco-modal">
+        <div class="eco-backdrop"></div>
+
+        <div class="eco-card">
+            <button class="eco-close">✕</button>
+
+            <div class="eco-image">
+                <img id="eco-img" src="" alt="">
+            </div>
+
+            <div class="eco-info">
+                <h2 id="eco-title"></h2>
+                <p id="eco-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGO -->
+    <div id="logo-container">
+        <img src="../logo.PNG" alt="Logo" id="logo-img">
+        <span id="logo-text">海洋生態</span>
+    </div>
+    <!-- 右上角按鈕 -->
+    <div class="ui-top">
+        <button id="menuBtn" class="hamburger glass-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- 側邊遮罩 -->
+    <div id="menuOverlay"></div>
+
+    <!-- 側邊選單 -->
+    <div id="sideMenu" class="side-menu">
+        <ul>
+            <li><a href="../index.html">首頁</a></li>
+            <li><a href="../marine/Marine.html" class="active">海洋生態</a></li>
+            <li><a href="../trash/Trash.html">海洋垃圾</a></li>
+            <li><a href="../goods/Good.html">環保商品</a></li>
+            <li><a href="../volunteer/Volunteer.html">志工</a></li>
+            <li>
+                <a href="../game/Trash-Game.html">
+                    <img src="../game.PNG" class="menu-icon">
+                    海洋消消樂
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="slide">
+            <div class="item" style="background-image: url(./fish.jpg);">
+                <div class="content">
+                    <div class="name"></div>
+                    <div class="des"></div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(./2..jpg);">
+                <div class="content">
+                    <div class="name"></div>
+                    <div class="des"></div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(./3..jpg);">
+                <div class="content">
+                    <div class="name"></div>
+                    <div class="des"></div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+
+            <div class="item" style="background-image: url(./5..jpg);">
+                <div class="content">
+                    <div class="name"></div>
+                    <div class="des"></div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+            <div class="item" style="background-image: url(./otter.jpg);">
+                <div class="content">
+                    <div class="name"></div>
+                    <div class="des"></div>
+                    <button class="see-more">See More</button>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <button class="prev">
+                <a href="#"><i class="fa-solid fa-chevron-left"></i></a>
+            </button>
+            <button class="next">
+                <a href="#"><i class="fa-solid fa-chevron-right"></i></a>
+            </button>
+        </div>
+    </div>
+    <script src="index.js"></script>
+    <script src="nav.js"></script>
+
+    <div id="detailModal" class="detail-modal">
+        <div class="detail-card">
+            <h2 id="detailTitle"></h2>
+            <p id="detailText"></p>
+            <button id="closeDetail">關閉</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
