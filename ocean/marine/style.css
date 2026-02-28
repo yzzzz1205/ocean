@@ -1,0 +1,519 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #87ceeb;
+    overflow: hidden;
+}
+
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1000px;
+    height: 600px;
+    background: transparent;
+    box-shadow: 0 30px 50px blueviolet;
+    z-index: 2;
+}
+
+.item{
+    width: 200px;
+    height: 300px;
+    position: absolute;
+    top: 60%;
+    transform: translate(0, -50%);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px burlywood ;
+    background-position: 50% 50%;
+    background-size: cover;
+    display: inline-block;
+    transition: 0.5s;
+    
+}
+
+.item:nth-child(1), 
+.item:nth-child(2){
+    top: 0;
+    left: 0;
+    transform: translate(0,0);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+.item:nth-child(3){
+    left: calc(50% + 90px);
+}
+.item:nth-child(4){
+    left: calc(50% + 320px);
+}
+.item:nth-child(n+5){
+    left: calc(50% + 540px);  
+    opacity: 0;
+}
+
+.item .content{
+   position: absolute;
+   top: 50%;
+   left: 100px;
+   width: 340px;
+
+   background: none;
+   backdrop-filter: none;
+
+   padding: 0;
+   border-radius: 0;
+
+   color: #f5fbff;
+
+   text-shadow: 
+       0 0 10px rgba(120,200,255,0.6),
+       0 0 20px rgba(120,200,255,0.4),
+       0 4px 10px rgba(0,0,0,0.8);
+
+   transform: translate(0, -50%);
+   font-family: system-ui;
+   display: none;
+}
+
+.item:nth-child(2) .content{
+    display: block;
+}
+
+.name{
+    font-size: 42px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    opacity: 0;
+    animation: animate 1s ease-in-out 1 forwards;
+    font-family: LXGW WenKai TC;
+    text-shadow:
+        0 0 12px rgba(140,210,255,0.9),
+        0 0 24px rgba(140,210,255,0.6),
+        0 6px 12px rgba(0,0,0,0.8);
+}
+.des{
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e9f7ff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.3s 1 forwards;
+    font-family: LXGW WenKai TC;
+    text-shadow:
+        0 0 6px rgba(120,200,255,0.4),
+        0 3px 8px rgba(0,0,0,0.8);
+}
+.content button{
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    animation: animate 1s ease-in-out 0.6s 1 forwards;
+    font-family: LXGW WenKai TC;
+
+}
+@keyframes animate {
+    from{
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translate(0);
+        filter: blur(0);
+    }
+}
+
+.button{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    
+}
+/* ===== 海洋玻璃乳白切換按鈕 ===== */
+.button button{
+    position: relative;
+    overflow: hidden;
+
+    width: 58px;
+    height: 42px;
+    border-radius: 10px;
+
+    border: 1px solid rgba(255,255,255,0.45);
+    cursor: pointer;
+    margin: 0 14px;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.55),
+        rgba(255,255,255,0.25)
+    );
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    color: #1b3555;
+    font-size: 20px;
+    font-weight: 600;
+
+    box-shadow: 
+        0 8px 25px rgba(0,0,0,0.25),
+        inset 0 0 12px rgba(255,255,255,0.5),
+        0 0 12px rgba(180,220,255,0.35);
+
+    transition: .35s ease;
+}
+
+/* hover 浮起 + 光感 */
+.button button:hover{
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 
+        0 15px 35px rgba(0,0,0,0.35),
+        inset 0 0 16px rgba(255,255,255,0.7),
+        0 0 20px rgba(180,220,255,0.6);
+}
+/* ===== 箭頭預設色（白偏藍） ===== */
+.button button i{
+    color: rgba(235, 248, 255, 0.95); /* 乳白偏藍 */
+    text-shadow: 
+        0 0 6px rgba(180,220,255,0.6),
+        0 0 12px rgba(140,200,255,0.4);
+    transition: .3s ease;
+}
+
+/* ===== hover：箭頭微亮 ===== */
+.button button:hover i{
+    color: rgba(255,255,255,1);
+    text-shadow: 
+        0 0 10px rgba(200,230,255,0.8),
+        0 0 18px rgba(160,210,255,0.6);
+}
+
+/* ===== 按下時（整顆按鈕被按） ===== */
+.button button:active{
+    /* 白色變深一點 */
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.75),
+        rgba(255,255,255,0.45)
+    );
+
+    box-shadow: 
+        0 4px 12px rgba(0,0,0,0.35),
+        inset 0 0 20px rgba(255,255,255,0.8),
+        0 0 18px rgba(120,180,255,0.45);
+
+    transform: scale(0.95);
+}
+
+/* ===== 按下時箭頭變深藍色 ===== */
+.button button:active i{
+    color: #0b2e5f;   /* 深海藍 */
+    text-shadow: 
+        0 0 6px rgba(80,140,220,0.6),
+        0 0 14px rgba(60,120,200,0.5);
+}
+
+
+/* 點擊回饋 */
+.button button:active{
+    transform: scale(0.96);
+}
+
+/* ===== 水波特效 ===== */
+.button button .ripple{
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.8) 0%,
+        rgba(200,230,255,0.45) 35%,
+        rgba(180,220,255,0.25) 55%,
+        transparent 70%
+    );
+    transform: scale(0);
+    animation: rippleEffect 0.8s ease-out;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect{
+    to{
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ===== See More Modal ===== */
+.eco-modal{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+}
+
+.eco-modal.show{
+    display: block;
+}
+
+.eco-backdrop{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+}
+
+/* 卡片本體 */
+.eco-card{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.85);
+    width: 70%;
+    max-width: 900px;
+    height: 70%;
+    border-radius: 24px;
+
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    overflow: hidden;
+
+    opacity: 0;
+    animation: ecoPop .5s ease forwards;
+}
+
+@keyframes ecoPop{
+    from{
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.7);
+        filter: blur(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(0);
+    }
+}
+
+/* 左圖 */
+.eco-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 右資訊 */
+.eco-info{
+    padding: 30px;
+    color: #eaf6ff;
+    overflow-y: auto;
+    font-family: "LXGW WenKai TC";
+}
+
+.eco-info h2{
+    font-size: 36px;
+    margin-bottom: 16px;
+}
+
+.eco-info p{
+    line-height: 1.9;
+    font-size: 16px;
+    opacity: .9;
+}
+
+/* 關閉鍵 */
+.eco-close{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 18px;
+
+    backdrop-filter: blur(6px);
+    transition: .25s;
+}
+
+.eco-close:hover{
+    background: rgba(255,255,255,0.35);
+    transform: scale(1.1);
+}
+
+
+.detail-modal{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: .4s;
+    z-index: 9999;
+}
+
+.detail-modal.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.detail-card{
+    width: 520px;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 28px;
+    color: white;
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+
+.detail-card h2{
+    margin-bottom: 15px;
+}
+
+#closeDetail{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+/* ===== Ocean Dynamic Background ===== */
+.ocean-bg{
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(120,180,255,0.25),
+        rgba(20,60,120,0.85) 60%,
+        rgba(5,20,50,1) 100%
+    );
+
+    overflow: hidden;
+
+    transition: background 0.25s ease;
+}
+
+/* 波紋層 */
+.ocean-bg::before,
+.ocean-bg::after{
+    content: "";
+    position: absolute;
+    inset: -50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.18) 3%,
+        rgba(255,255,255,0.05) 6%,
+        transparent 7%
+    );
+
+    background-size: 140px 140px;
+    animation: waveMove 45s linear infinite;
+    opacity: 0.6;
+    filter: blur(0.5px);
+    transform: translate(var(--mx, 0px), var(--my, 0px));
+}
+
+.ocean-bg::after{
+    background-size: 220px 220px;
+    animation-duration: 70s;
+    opacity: 0.4;
+}
+
+@keyframes waveMove{
+    from{
+        transform: translate(0,0);
+    }
+    to{
+        transform: translate(300px,300px);
+    }
+}
+
+.see-more{
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.12);
+    color: white;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+
+    transition: 
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+/* 浮起發光 */
+.see-more:hover{
+    transform: translateY(-4px) scale(1.02);
+    background: rgba(180,240,255,0.25);
+    box-shadow:
+        0 0 12px rgba(120,200,255,0.6),
+        0 0 30px rgba(120,200,255,0.4),
+        0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* 水波光掃描 */
+.see-more::after{
+    content:"";
+    position:absolute;
+    top:-50%;
+    left:-60%;
+    width:50%;
+    height:200%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transform: rotate(20deg);
+    transition: .6s;
+}
+
+.see-more:hover::after{
+    left:120%;
+}
+
+/* 點擊回饋 */
+.see-more:active{
+    transform: scale(.96);
+}
+

@@ -1,0 +1,267 @@
+/* ===== 左上角 Logo ===== */
+#logo-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* Logo 與文字間距 */
+    z-index: 2000;
+}
+
+#logo-img {
+    width: 70px;
+    /* 比之前大 */
+    height: 70px;
+    border-radius: 50%;
+    /* 保持圓形 */
+    object-fit: cover;
+
+}
+
+/* Logo 文字 */
+#logo-text {
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-weight: 700;
+    /* 粗字更醒目 */
+    font-size: 48px;
+    /* 大字體 */
+    color: #ffffff;
+    /* 白色文字 */
+    text-shadow: 2px 2px 0 #8A99DE, 3px 3px 4px rgba(0, 0, 50, 0.3);
+    /* 呼應 Logo 顏色 */
+}
+
+/* ====== 右上角 UI ====== */
+.ui-top {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 14px;
+    z-index: 2000;
+    overflow: visible;
+}
+
+/* 毛玻璃按鈕共用 */
+.glass-btn {
+    width: 62px;
+    height: 62px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 0 8px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.35s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glass-btn:hover {
+    background-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+}
+
+/* active：按壓 */
+.glass-btn:active {
+    transform: translateY(1px) scale(0.97);
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.2),
+        inset 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Hamburger 圓形按鈕 ===== */
+.hamburger span {
+    position: absolute;
+    width: 28px;
+    height: 3px;
+    background: white;
+    /* ✅ 改成白色線條 */
+    border-radius: 2px;
+    transition: all 0.4s ease;
+}
+
+/* 上、中、下線位置保持不變 */
+.hamburger span:nth-child(1) {
+    top: 18px;
+}
+
+.hamburger span:nth-child(2) {
+    top: 29px;
+}
+
+.hamburger span:nth-child(3) {
+    top: 40px;
+}
+
+/* Hamburger 展開動畫保持不變 */
+.hamburger.active span:nth-child(1) {
+    top: 29px;
+    transform: rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    top: 29px;
+    transform: rotate(-45deg);
+}
+
+/* ===== 側邊選單（海洋毛玻璃 + 漸層波動 + 彈性滑出） ===== */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* 永遠貼齊右側 */
+    width: 240px;
+    height: 100vh;
+
+    transform: translateX(100%);
+    /* 往右藏起來 */
+    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background: linear-gradient(270deg,
+            rgba(10, 105, 164, 0.6),
+            rgba(29, 161, 242, 0.6));
+    background-size: 200% 200%;
+    animation: oceanWave 6s ease-in-out infinite;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+    color: white;
+    padding-top: 100px;
+    z-index: 1500;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+/* 開啟選單 */
+.side-menu.open {
+    transform: translateX(0);
+}
+
+
+/* 漸層波動動畫 */
+@keyframes oceanWave {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 彈性滑入動畫 */
+@keyframes slideIn {
+    0% {
+        right: -260px;
+    }
+
+    60% {
+        right: 10px;
+    }
+
+    /* 彈性超出 */
+    80% {
+        right: -5px;
+    }
+
+    /* 往回 */
+    100% {
+        right: 0;
+    }
+}
+
+/* 選單列表 */
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.side-menu ul li {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 18px 0;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.side-menu ul li:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(0);
+}
+
+.side-menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    /* 去掉底線 */
+    display: block;
+    padding: 12px 20px;
+    transition: background 0.3s;
+}
+
+/* 側邊列當前頁標示（海洋垃圾） */
+.side-menu ul li a.active {
+    font-weight: bold;
+    color: #ffffff;
+    position: relative;
+    display: block;         
+    padding: 12px 20px;          /* 增加上下高度 */
+    background: rgba(255, 255, 255, 0.25); /* 半透明白底，稍微更明顯 */
+    border-radius: 10px;           /* 跟 hover 圓角統一 */
+    transition: all 0.3s;
+    z-index: 1;
+}
+
+/* 左側彩條 */
+.side-menu ul li a.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 8px;                      /* 彩條更粗 */
+    height: 100%;                   
+    background: linear-gradient(180deg, #00d4ff, #0059ff); /* 顏色更飽和 */
+    border-radius: 0 4px 4px 0;
+    z-index: 2;
+}
+/* icon 大小 */
+.menu-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+
+    position: relative;
+    top: 5px;   /* ⬅️ 往下 1～3px，自行微調 */
+    right: 5px;
+}
+
+.side-menu ul li a.active .menu-icon {
+    filter: brightness(1.4);
+}
+.side-menu ul li a:hover .menu-icon {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
