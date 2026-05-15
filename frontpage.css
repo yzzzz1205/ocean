@@ -97,7 +97,8 @@ footer {
 nav {
     position: absolute;
     top: 24px;
-    right: 24px;   /* 固定在右邊 */
+    right: 24px;
+    /* 固定在右邊 */
 
     display: inline-flex;
     align-items: center;
@@ -110,14 +111,15 @@ nav {
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 
-        0 10px 40px rgba(0,0,0,0.35),
-        inset 0 0 12px rgba(255,255,255,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.35),
+        inset 0 0 12px rgba(255, 255, 255, 0.15);
 
     width: auto;
 
-    left: auto;   /* ⭐ 防止被舊設定影響 */
+    left: auto;
+    /* ⭐ 防止被舊設定影響 */
 }
 
 
@@ -143,15 +145,13 @@ nav a::after {
     height: 2px;
     border-radius: 10px;
 
-    background: linear-gradient(
-        90deg,
-        rgba(200,240,255,.8),
-        rgba(160,220,255,.8)
-    );
+    background: linear-gradient(90deg,
+            rgba(200, 240, 255, .8),
+            rgba(160, 220, 255, .8));
 
-    box-shadow: 0 0 10px rgba(180,230,255,.6);
+    box-shadow: 0 0 10px rgba(180, 230, 255, .6);
     transform: translateX(-50%);
-    transition: width .35s cubic-bezier(.4,0,.2,1);
+    transition: width .35s cubic-bezier(.4, 0, .2, 1);
 }
 
 
