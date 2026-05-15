@@ -46,32 +46,32 @@ document.addEventListener("mousemove", (e) => {
 });
 
 /* ===== 首頁背景泡泡系統 ===== */
-function initBackgroundBubbles(){
+function initBackgroundBubbles() {
     const layer = document.querySelector('.bubble-bg-layer');
-    if(!layer) return;
+    if (!layer) return;
 
-    setInterval(()=>{
+    setInterval(() => {
         const bubble = document.createElement('span');
         bubble.className = 'bg-bubble';
 
         // 大小
-        const size = 6 + Math.random()*18;
-        bubble.style.width = size+'px';
-        bubble.style.height = size+'px';
+        const size = 6 + Math.random() * 18;
+        bubble.style.width = size + 'px';
+        bubble.style.height = size + 'px';
 
         // 位置
-        bubble.style.left = Math.random()*100+'%';
+        bubble.style.left = Math.random() * 100 + '%';
 
         // 動畫時間（越大越慢）
-        const duration = 12 + Math.random()*18;
-        bubble.style.animationDuration = duration+'s';
+        const duration = 12 + Math.random() * 18;
+        bubble.style.animationDuration = duration + 's';
 
         // 透明度微變化
-        bubble.style.opacity = 0.25 + Math.random()*0.35;
+        bubble.style.opacity = 0.25 + Math.random() * 0.35;
 
         layer.appendChild(bubble);
 
-        setTimeout(()=>bubble.remove(), duration*1000);
+        setTimeout(() => bubble.remove(), duration * 1000);
     }, 800); // 👉 數字越大 = 泡泡越稀疏
 }
 
