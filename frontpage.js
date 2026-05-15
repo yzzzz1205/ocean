@@ -30,21 +30,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 let lastRipple = 0;
 
-document.addEventListener("mousemove", (e) => {
-    const now = Date.now();
-    if (now - lastRipple < 120) return; // 控制密度
-    lastRipple = now;
+if (window.innerWidth > 768) {
 
-    const ripple = document.createElement("span");
-    ripple.className = "ripple";
-    ripple.style.left = `${e.clientX}px`;
-    ripple.style.top = `${e.clientY}px`;
+    document.addEventListener("mousemove", (e) => {
 
-    document.body.appendChild(ripple);
+        const now = Date.now();
+        if (now - lastRipple < 120) return;
 
-    setTimeout(() => ripple.remove(), 1200);
-});
+        lastRipple = now;
 
+        const ripple = document.createElement("span");
+        ripple.className = "ripple";
+
+        ripple.style.left = `${e.clientX}px`;
+        ripple.style.top = `${e.clientY}px`;
+
+        document.body.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 1200);
+    });
+
+}
 /* ===== 首頁背景泡泡系統 ===== */
 function initBackgroundBubbles() {
     const layer = document.querySelector('.bubble-bg-layer');
