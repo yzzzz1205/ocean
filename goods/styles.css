@@ -322,6 +322,7 @@ main {
         transform: translateY(20px) scale(0.96);
         opacity: 0;
     }
+
     to {
         transform: translateY(0) scale(1);
         opacity: 1;
@@ -334,12 +335,10 @@ main {
     inset: 0;
     border-radius: inherit;
 
-    background: linear-gradient(
-        120deg,
-        transparent 40%,
-        rgba(200, 240, 255, 0.25) 50%,
-        transparent 60%
-    );
+    background: linear-gradient(120deg,
+            transparent 40%,
+            rgba(200, 240, 255, 0.25) 50%,
+            transparent 60%);
 
     opacity: 0.35;
     pointer-events: none;
@@ -400,17 +399,15 @@ main {
     border-radius: 50%;
     pointer-events: none;
 
-    background: radial-gradient(
-        circle at 30% 30%,
-        rgba(255,255,255,0.95),
-        rgba(180,230,255,0.55),
-        rgba(120,190,230,0.25),
-        rgba(80,150,200,0.1)
-    );
+    background: radial-gradient(circle at 30% 30%,
+            rgba(255, 255, 255, 0.95),
+            rgba(180, 230, 255, 0.55),
+            rgba(120, 190, 230, 0.25),
+            rgba(80, 150, 200, 0.1));
 
     box-shadow:
-        0 0 10px rgba(180,230,255,0.6),
-        inset 0 0 6px rgba(255,255,255,0.6);
+        0 0 10px rgba(180, 230, 255, 0.6),
+        inset 0 0 6px rgba(255, 255, 255, 0.6);
 
     animation: bubbleFloat linear forwards;
 }
@@ -420,12 +417,15 @@ main {
         transform: translateY(0) scale(0.6);
         opacity: 0.9;
     }
-    40%{
-        opacity:0.7;
+
+    40% {
+        opacity: 0.7;
     }
-    70%{
-        opacity:0.4;
+
+    70% {
+        opacity: 0.4;
     }
+
     100% {
         transform: translateY(-260px) scale(1.6);
         opacity: 0;
@@ -437,9 +437,17 @@ main {
 }
 
 @keyframes cartBounce {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .qty-card {
@@ -466,7 +474,7 @@ main {
     border-radius: 50%;
     border: none;
 
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.25);
     color: white;
     font-size: 20px;
     cursor: pointer;
@@ -477,8 +485,8 @@ main {
     height: 40px;
     border-radius: 999px;
 
-    background: rgba(255,255,255,0.25);
-    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 
     color: white;
     letter-spacing: 0.2em;
@@ -509,7 +517,7 @@ main {
     height: 28px;
     border-radius: 50%;
     border: none;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.25);
     color: white;
 }
 
@@ -533,54 +541,54 @@ main {
     filter: brightness(1.15);
 }
 
-.glass-btn{
+.glass-btn {
     position: relative;
     padding: 14px 32px;
     border-radius: 18px;
-    border: 1px solid rgba(255,255,255,0.35);
-    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    color:#fff;
-    font-size:16px;
-    letter-spacing:1px;
-    cursor:pointer;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    cursor: pointer;
     transition: all .35s ease;
-    box-shadow: 0 8px 30px rgba(0,0,0,.15);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .15);
 }
 
 /* hover 浮起變亮 */
-.glass-btn:hover{
+.glass-btn:hover {
     transform: translateY(-4px) scale(1.02);
     filter: brightness(1.35);
-    box-shadow: 0 18px 50px rgba(0,0,0,.25);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .25);
 }
 
 /* 點擊 */
-.glass-btn:active{
+.glass-btn:active {
     transform: translateY(-1px) scale(0.98);
 }
 
 /* ===== 購物車內結帳區 ===== */
-.cart-checkout{
+.cart-checkout {
     margin-top: 24px;
     padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
 
-.cart-total{
-    color: rgba(220,245,255,.95);
+.cart-total {
+    color: rgba(220, 245, 255, .95);
     font-size: 16px;
     letter-spacing: 1px;
 }
 
 /* 結帳按鈕 */
-.cart-checkout-btn{
+.cart-checkout-btn {
     padding: 12px 28px;
     border-radius: 999px;
     font-size: 15px;
@@ -588,108 +596,118 @@ main {
 }
 
 /* ===== 成功 Modal ===== */
-.success-modal{
-    position:fixed;
-    inset:0;
-    background: rgba(0,0,0,0.35);
+.success-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(6px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:0;
-    pointer-events:none;
-    transition:.4s;
-    z-index:10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: .4s;
+    z-index: 10000;
 }
 
-.success-modal.show{
-    opacity:1;
-    pointer-events:auto;
+.success-modal.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* 玻璃卡片 */
-.success-card{
-    position:relative;
-    width:360px;
-    padding:40px 30px;
-    border-radius:28px;
-    background: rgba(255,255,255,0.18);
+.success-card {
+    position: relative;
+    width: 360px;
+    padding: 40px 30px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border:1px solid rgba(255,255,255,.35);
-    box-shadow: 0 25px 80px rgba(0,0,0,.35);
-    text-align:center;
-    animation: popIn .6s cubic-bezier(.2,.8,.3,1);
+    border: 1px solid rgba(255, 255, 255, .35);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, .35);
+    text-align: center;
+    animation: popIn .6s cubic-bezier(.2, .8, .3, 1);
 }
 
-@keyframes popIn{
-    from{ transform: scale(.7) translateY(30px); opacity:0; }
-    to{ transform: scale(1) translateY(0); opacity:1; }
+@keyframes popIn {
+    from {
+        transform: scale(.7) translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
 }
 
-.success-content h2{
-    font-size:26px;
-    margin-bottom:12px;
-    color:#e8f8ff;
-    text-shadow: 0 0 12px rgba(120,200,255,.6);
+.success-content h2 {
+    font-size: 26px;
+    margin-bottom: 12px;
+    color: #e8f8ff;
+    text-shadow: 0 0 12px rgba(120, 200, 255, .6);
 }
 
-.success-content p{
-    color: rgba(255,255,255,.8);
+.success-content p {
+    color: rgba(255, 255, 255, .8);
 }
 
 /* 關閉鍵 */
-.success-close{
-    position:absolute;
-    top:14px;
-    right:16px;
-    background:none;
-    border:none;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-    opacity:.7;
+.success-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: .7;
 }
 
-.success-close:hover{ opacity:1; }
+.success-close:hover {
+    opacity: 1;
+}
 
 /* 成功特效容器 */
-.success-effects{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
+.success-effects {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 }
 
-@keyframes floatUp{
-    from{
+@keyframes floatUp {
+    from {
         transform: translateY(0) scale(1);
-        opacity:1;
+        opacity: 1;
     }
-    to{
+
+    to {
         transform: translateY(-140px) scale(.3);
-        opacity:0;
+        opacity: 0;
     }
 }
 
 /* ===== 購物車結帳區（直向） ===== */
-.cart-checkout-vertical{
+.cart-checkout-vertical {
     margin-top: 22px;
     padding-top: 14px;
 
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 14px;
 }
 
 /* 總金額文字（無框線純文字） */
-.cart-total-text{
-    color: rgba(220,245,255,.95);
+.cart-total-text {
+    color: rgba(220, 245, 255, .95);
     font-size: 16px;
     letter-spacing: 2px;
 }
 
-.checkout-car-btn{
+.checkout-car-btn {
     width: 210px;
     height: 38px;
     font-size: 15px;
@@ -697,96 +715,251 @@ main {
 }
 
 /* 🌊 波紋 */
-.success-ripple{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    border:2px solid rgba(120,200,255,.6);
-    transform:translate(-50%,-50%);
-    animation:ripple 1.2s ease-out forwards;
+.success-ripple {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(120, 200, 255, .6);
+    transform: translate(-50%, -50%);
+    animation: ripple 1.2s ease-out forwards;
 }
 
-@keyframes ripple{
-    to{
-        width:260px;
-        height:260px;
-        opacity:0;
+@keyframes ripple {
+    to {
+        width: 260px;
+        height: 260px;
+        opacity: 0;
     }
 }
 
 /* ✨ 光點爆散 */
-.success-spark{
-    position:absolute;
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:rgba(160,220,255,.9);
-    box-shadow:0 0 12px rgba(120,200,255,.9);
-    transform:translate(-50%,-50%);
-    animation:sparkMove 1.2s ease-out forwards;
+.success-spark {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(160, 220, 255, .9);
+    box-shadow: 0 0 12px rgba(120, 200, 255, .9);
+    transform: translate(-50%, -50%);
+    animation: sparkMove 1.2s ease-out forwards;
 }
 
-@keyframes sparkMove{
-    to{
-        transform:translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(.2);
-        opacity:0;
+@keyframes sparkMove {
+    to {
+        transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(.2);
+        opacity: 0;
     }
 }
 
 /* 🫧 成功泡泡 */
-.success-bubble{
-    position:absolute;
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background: radial-gradient(circle at 30% 30%, #fff, rgba(150,220,255,.6), rgba(120,190,230,.3));
-    box-shadow:0 0 10px rgba(160,220,255,.8);
+.success-bubble {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #fff, rgba(150, 220, 255, .6), rgba(120, 190, 230, .3));
+    box-shadow: 0 0 10px rgba(160, 220, 255, .8);
     animation: successBubble 3.5s ease-out forwards;
 }
 
-@keyframes successBubble{
-    from{ transform:translateY(0) scale(.6); opacity:.9; }
-    to{ transform:translateY(-220px) scale(1.4); opacity:0; }
+@keyframes successBubble {
+    from {
+        transform: translateY(0) scale(.6);
+        opacity: .9;
+    }
+
+    to {
+        transform: translateY(-220px) scale(1.4);
+        opacity: 0;
+    }
 }
 
 /* ===== 深海漂浮背景層 ===== */
-.deep-sea-layer{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:1; /* 在背景但在背景圖之上 */
-    overflow:hidden;
+.deep-sea-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    /* 在背景但在背景圖之上 */
+    overflow: hidden;
 }
 
 /* 單顆粒子 */
-.sea-particle{
-    position:absolute;
-    width:6px;
-    height:6px;
-    border-radius:50%;
+.sea-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     background: radial-gradient(circle at 30% 30%,
-        rgba(255,255,255,.9),
-        rgba(120,200,255,.5),
-        rgba(50,120,180,.2)
-    );
-    box-shadow: 0 0 12px rgba(120,200,255,.6);
-    opacity:.6;
+            rgba(255, 255, 255, .9),
+            rgba(120, 200, 255, .5),
+            rgba(50, 120, 180, .2));
+    box-shadow: 0 0 12px rgba(120, 200, 255, .6);
+    opacity: .6;
     animation: seaFloat linear infinite;
 }
 
-@keyframes seaFloat{
-    from{
+@keyframes seaFloat {
+    from {
         transform: translateY(0) scale(.6);
-        opacity:.2;
+        opacity: .2;
     }
-    30%{
-        opacity:.6;
+
+    30% {
+        opacity: .6;
     }
-    to{
+
+    to {
         transform: translateY(-120vh) scale(1.2);
-        opacity:0;
+        opacity: 0;
     }
+}
+
+/* =========================
+   🌊 防止左右滑（非常重要）
+   ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+/* =========================
+   🖥️ 桌機（維持原本）
+   ========================= */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px 35px;
+}
+
+@media (min-width: 1025px) {
+    .product-grid {
+        grid-template-columns: repeat(5, 250px);
+        justify-content: center;
+        /* 讓整排置中 */
+    }
+}
+
+/* =========================
+   📱 平板 (<=1024px)
+   ========================= */
+@media (max-width: 1024px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+        padding: 30px 20px;
+    }
+
+    .box {
+        width: 100%;
+        height: auto;
+        min-height: 380px;
+    }
+
+    .circle {
+        width: 100%;
+        height: 220px;
+    }
+}
+
+/* =========================
+   📱 手機（重點：2欄）
+   <=768px
+   ========================= */
+@media (max-width: 768px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* ⭐ 重點：手機仍2欄 */
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .box {
+        width: 100%;
+        min-height: 360px;
+        /* 保持直式卡片 */
+        border-radius: 16px;
+    }
+
+    .circle {
+        width: 100%;
+        height: 180px;
+        /* 控制圖片高度避免爆 */
+    }
+
+    .commodity {
+        font-size: 0.95rem;
+        letter-spacing: 0.1em;
+    }
+
+    .money {
+        font-size: 0.9rem;
+    }
+
+    .car {
+        width: 90%;
+        height: 38px;
+        font-size: 13px;
+    }
+}
+
+/* =========================
+   📱 小手機 (<=480px)
+   ========================= */
+@media (max-width: 480px) {
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* ⭐ 仍然2欄不變 */
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .box {
+        min-height: 340px;
+        border-radius: 14px;
+    }
+
+    .circle {
+        height: 160px;
+    }
+
+    .commodity {
+        font-size: 0.85rem;
+    }
+
+    .money {
+        font-size: 0.85rem;
+    }
+
+    .car {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+    }
+}
+
+/* =========================
+   🚫 強制避免 carousel 撐爆
+   ========================= */
+.carousel {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    width: 100%;
+}
+
+/* 每張圖不超出卡片 */
+.carousel-images img {
+    width: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
 }

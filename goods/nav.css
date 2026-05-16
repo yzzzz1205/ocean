@@ -6,7 +6,6 @@
     width: 100%;
     height: 120px;
     z-index: 1000;
-    /* 最底 */
 }
 
 .header-bg {
@@ -19,10 +18,9 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 6px 16px rgba(0, 30, 80, 0.35);
- pointer-events: none;
+    pointer-events: none;
     z-index: 1;
 }
-
 
 /* ===== 左上角 Logo ===== */
 #logo-container {
@@ -34,7 +32,6 @@
     gap: 16px;
     z-index: 3000;
 }
-
 
 #logo-img {
     width: 70px;
@@ -58,29 +55,17 @@
     right: 20px;
     display: flex;
     gap: 14px;
-    z-index: 9999;   /* ⬅️ 超過 header 與 side-menu */
+    z-index: 9999;
 }
 
-/* 小螢幕調整按鈕 */
-@media (max-width: 500px) {
-    #header {
-        padding: 0 15px;
-    }
-
-    .glass-btn {
-        width: 50px;
-        height: 50px;
-    }
-
-    .ui-top {
-        gap: 10px;
-    }
-}
-
-/* 毛玻璃按鈕共用 */
+/* ===== 毛玻璃按鈕共用 (基礎設定) ===== */
 .glass-btn {
     width: 62px;
     height: 62px;
+    min-width: 62px;  /* ⭐ 強制鎖定最小寬度，防止排版擠壓 */
+    min-height: 62px; /* ⭐ 強制鎖定最小高度 */
+    padding: 0;       /* ⭐ 清除瀏覽器預設 padding，避免按鈕變形 */
+    box-sizing: border-box; 
     border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 50%;
     backdrop-filter: blur(8px);
@@ -92,6 +77,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;    /* ⭐ 防止被 Flex 容器壓扁 */
+    aspect-ratio: 1 / 1; /* ⭐ 強制 1:1 正圓 */
 }
 
 .glass-btn:hover {
@@ -107,6 +94,11 @@
 }
 
 /* Hamburger 圓形按鈕 */
+.hamburger {
+    position: relative;
+    flex-shrink: 0;
+}
+
 .hamburger span {
     position: absolute;
     width: 28px;
@@ -116,17 +108,9 @@
     transition: all 0.4s ease;
 }
 
-.hamburger span:nth-child(1) {
-    top: 18px;
-}
-
-.hamburger span:nth-child(2) {
-    top: 29px;
-}
-
-.hamburger span:nth-child(3) {
-    top: 40px;
-}
+.hamburger span:nth-child(1) { top: 18px; }
+.hamburger span:nth-child(2) { top: 29px; }
+.hamburger span:nth-child(3) { top: 40px; }
 
 .hamburger.active span:nth-child(1) {
     top: 29px;
@@ -142,41 +126,28 @@
     transform: rotate(-45deg);
 }
 
-/* ===== 側邊選單（海洋毛玻璃 + 漸層波動 + 彈性滑出） ===== */
-/* 側邊欄專用字體 */
+/* ===== 側邊選單 ===== */
 .side-menu,
 .side-menu a {
-  font-family: 
-    "Noto Sans TC",
-    "PingFang TC",
-    "Microsoft JhengHei",
-    sans-serif;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
 }
 
 .side-menu {
     position: fixed;
     top: 0;
     right: 0;
-    /* 永遠貼齊右側 */
     width: 240px;
     height: 100vh;
     z-index: 2000;
-    /* ⬅️ 比 header 大 */
     transform: translateX(100%);
-
-    /* 往右藏起來 */
     transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
-    background: linear-gradient(270deg,
-            rgba(10, 105, 164, 0.6),
-            rgba(29, 161, 242, 0.6));
+    background: linear-gradient(270deg, rgba(10, 105, 164, 0.6), rgba(29, 161, 242, 0.6));
     background-size: 200% 200%;
     animation: oceanWave 6s ease-in-out infinite;
-
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-
     color: white;
     padding-top: 100px;
     display: flex;
@@ -184,50 +155,16 @@
     overflow: hidden;
 }
 
-
-/* 開啟選單 */
 .side-menu.open {
     transform: translateX(0);
 }
 
-
-/* 漸層波動動畫 */
 @keyframes oceanWave {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* 彈性滑入動畫 */
-@keyframes slideIn {
-    0% {
-        right: -260px;
-    }
-
-    60% {
-        right: 10px;
-    }
-
-    /* 彈性超出 */
-    80% {
-        right: -5px;
-    }
-
-    /* 往回 */
-    100% {
-        right: 0;
-    }
-}
-
-/* 選單列表 */
 .side-menu ul {
     list-style: none;
     padding: 0;
@@ -249,64 +186,161 @@
 
 .side-menu ul li:hover {
     background: rgba(255, 255, 255, 0.15);
-    transform: translateX(0);
 }
 
 .side-menu ul li a {
     color: #fff;
     text-decoration: none;
-    /* 去掉底線 */
     display: block;
     padding: 12px 20px;
     transition: background 0.3s;
 }
 
-/* 側邊列當前頁標示（海洋垃圾） */
 .side-menu ul li a.active {
     font-weight: bold;
     color: #ffffff;
     position: relative;
     display: block;
     padding: 12px 20px;
-    /* 增加上下高度 */
     background: rgba(255, 255, 255, 0.25);
-    /* 半透明白底，稍微更明顯 */
     border-radius: 10px;
-    /* 跟 hover 圓角統一 */
     transition: all 0.3s;
     z-index: 1;
 }
 
-/* 左側彩條 */
 .side-menu ul li a.active::before {
     content: "";
     position: absolute;
     left: 0;
     top: 0;
     width: 8px;
-    /* 彩條更粗 */
     height: 100%;
     background: linear-gradient(180deg, #00d4ff, #0059ff);
-    /* 顏色更飽和 */
     border-radius: 0 4px 4px 0;
     z-index: 2;
 }
-/* icon 大小 */
+
 .menu-icon {
     width: 22px;
     height: 22px;
     object-fit: contain;
     flex-shrink: 0;
-
     position: relative;
-    top: 5px;   /* ⬅️ 往下 1～3px，自行微調 */
+    top: 5px;
     right: 5px;
 }
 
 .side-menu ul li a.active .menu-icon {
     filter: brightness(1.4);
 }
+
 .side-menu ul li a:hover .menu-icon {
     transform: scale(1.1);
     transition: transform 0.2s ease;
+}
+
+
+/* =================================================== */
+/* ⭐⭐⭐ RWD 響應式斷點 (嚴格由大到小排序，確保正確覆蓋) ⭐⭐⭐ */
+/* =================================================== */
+
+/* ─── 1. 平板/筆電 (1024px 以下) ─── */
+@media screen and (max-width: 1024px) {
+    #logo-text {
+        font-size: 38px;
+    }
+}
+
+/* ─── 2. 中型手機/橫向 (768px 以下) ─── */
+@media screen and (max-width: 768px) {
+    #header {
+        height: 80px;
+    }
+
+    #logo-container {
+        top: 16px;
+        left: 16px;
+        gap: 10px;
+    }
+
+    #logo-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    #logo-text {
+        font-size: 28px;
+    }
+
+    .ui-top {
+        top: 12px;
+        right: 12px;
+    }
+
+    .glass-btn {
+        width: 52px;
+        height: 52px;
+        min-width: 52px;  /* 強制覆蓋 */
+        min-height: 52px; /* 強制覆蓋 */
+    }
+
+    .glass-btn img {
+        width: 26px;
+        height: 26px;
+        object-fit: contain;
+    }
+
+    .hamburger span {
+        width: 22px;
+    }
+
+    .hamburger span:nth-child(1) { top: 16px; }
+    .hamburger span:nth-child(2) { top: 25px; }
+    .hamburger span:nth-child(3) { top: 34px; }
+
+    .hamburger.active span:nth-child(1),
+    .hamburger.active span:nth-child(3) {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-50%) rotate(-45deg);
+    }
+
+    .side-menu {
+        width: 220px;
+        padding-top: 90px;
+    }
+
+    .side-menu ul li {
+        font-size: 17px;
+        padding: 10px 0;
+    }
+}
+
+/* ─── 3. 小型手機 (500px 以下) ─── */
+@media screen and (max-width: 500px) {
+    #header {
+        padding: 0 15px;
+    }
+
+    .glass-btn {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;  /* 強制縮小到 50px 依舊維持正圓 */
+        min-height: 50px; /* 強制縮小到 50px 依舊維持正圓 */
+    }
+
+    .ui-top {
+        gap: 10px;
+    }
+}
+
+/* ─── 4. 微型手機 (480px 以下) ─── */
+@media screen and (max-width: 480px) {
+    #logo-text {
+        font-size: 22px;
+    }
 }
