@@ -15,8 +15,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 1000px;
-    height: 600px;
+   width: min(1000px, 92vw);
+    height: min(600px, 80vh);
     background: transparent;
     box-shadow: 0 30px 50px blueviolet;
     z-index: 2;
@@ -516,4 +516,151 @@ body{
 .see-more:active{
     transform: scale(.96);
 }
+/* =========================================
+   MOBILE FINAL FIX
+========================================= */
 
+@media screen and (max-width: 768px){
+
+    html,
+    body{
+        width: 100%;
+        height: 100%;
+        overflow: hidden !important;
+        position: fixed;
+    }
+
+    body{
+        background: #87ceeb;
+    }
+
+    /* 主容器 */
+    .container{
+        position: fixed;
+        inset: 0;
+
+        width: 100vw;
+        height: 100dvh;
+
+        transform: none;
+        top: 0;
+        left: 0;
+
+        overflow: hidden;
+        box-shadow: none;
+    }
+
+    .slide{
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 主背景圖 */
+    .item:nth-child(1),
+    .item:nth-child(2){
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+    }
+
+    /* 下方縮圖 */
+    .item{
+        width: 82px;
+        height: 118px;
+
+        top: auto;
+        bottom: 90px;
+
+        border-radius: 16px;
+    }
+
+    .item:nth-child(3){
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .item:nth-child(4){
+        left: calc(50% + 62px);
+    }
+
+    .item:nth-child(n+5){
+        opacity: 0;
+    }
+
+    /* 文字內容 */
+    .item .content{
+        width: calc(100% - 40px);
+
+        left: 20px;
+        top: 34%;
+
+        transform: translateY(-50%);
+    }
+
+    .name{
+        font-size: 28px;
+        line-height: 1.3;
+    }
+
+    .des{
+        font-size: 13px;
+        line-height: 1.6;
+
+        margin-top: 10px;
+        margin-bottom: 14px;
+
+        width: 88%;
+    }
+
+    .see-more{
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    /* 左右切換按鈕 */
+    .button{
+        position: absolute;
+        bottom: 24px;
+        left: 0;
+
+        z-index: 999;
+    }
+
+    .button button{
+        width: 44px;
+        height: 36px;
+        margin: 0 5px;
+    }
+
+    /* modal */
+    .eco-card{
+        width: 92%;
+        height: 82dvh;
+
+        grid-template-columns: 1fr;
+    }
+
+    .eco-image{
+        height: 180px;
+    }
+
+    .eco-info{
+        padding: 18px;
+    }
+
+    .eco-info h2{
+        font-size: 24px;
+    }
+
+    .eco-info p{
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .detail-card{
+        width: 92%;
+        max-height: 75dvh;
+    }
+}

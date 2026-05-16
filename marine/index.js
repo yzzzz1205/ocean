@@ -87,10 +87,6 @@ document.querySelector('.eco-backdrop').addEventListener('click', ()=>{
     modal.classList.remove('show');
 });
 
-document.getElementById('closeDetail').addEventListener('click', ()=>{
-    document.getElementById('detailModal').classList.remove('show');
-});
-
 /* ===== 切換按鈕水波特效 ===== */
 document.querySelectorAll('.button button').forEach(btn=>{
     btn.addEventListener('click', function(e){
