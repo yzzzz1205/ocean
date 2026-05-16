@@ -214,6 +214,127 @@
         main {
             position: relative;
         }
+
+        /* =========================
+   📱 平板 (<=1024px)
+   ========================= */
+        @media (max-width: 1024px) {
+
+            main {
+                padding-top: 160px;
+            }
+
+            .circle-group {
+                gap: 28px;
+            }
+
+            .circle {
+                width: 200px;
+                height: 200px;
+            }
+
+            .content-container {
+                padding: 40px 40px;
+            }
+        }
+
+        /* =========================
+   📱 手機 (<=768px)
+   ========================= */
+        @media (max-width: 768px) {
+
+            /* header 空間修正 */
+            main {
+                padding-top: 120px;
+            }
+
+            /* 照片區 → 改成2欄 */
+            .circle-group {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+                padding: 0 16px;
+            }
+
+            .circle {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+
+            /* 內容卡片 */
+            .content-container {
+                padding: 28px 20px;
+                margin: 0 12px;
+                border-radius: 20px;
+            }
+
+            .intro-text {
+                font-size: 16px;
+                line-height: 1.7;
+            }
+
+            .text-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .text-card {
+                padding: 20px;
+            }
+
+            .text-card h2 {
+                font-size: 18px;
+            }
+
+            .text-card p {
+                font-size: 14px;
+            }
+
+            /* CTA */
+            .link1 a {
+                font-size: 18px;
+                padding: 14px 28px;
+            }
+        }
+
+        /* =========================
+   📱 小手機 (<=480px)
+   ========================= */
+        @media (max-width: 480px) {
+
+            main {
+                padding-top: 100px;
+            }
+
+            /* 圓圖變更密 */
+            .circle-group {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .content-container {
+                padding: 22px 14px;
+            }
+
+            .intro-text {
+                font-size: 14px;
+            }
+
+            .text-card h2 {
+                font-size: 16px;
+            }
+
+            .text-card p {
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+            .link1 a {
+                font-size: 16px;
+                padding: 12px 22px;
+            }
+        }
     </style>
 </head>
 
