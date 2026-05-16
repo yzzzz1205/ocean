@@ -1,11 +1,12 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    min-height: 100vh;           /* 避免因 height:600px 導致擠壓 */
+    min-height: 100vh;
+    /* 避免因 height:600px 導致擠壓 */
     width: 100%;
     background-image: url(./ppp2.jpg);
     background-repeat: no-repeat;
@@ -15,35 +16,38 @@ body {
 
 @media (max-width: 1024px) {
     body {
-        background-size: contain; /* iPad 手機用完整圖 */
+        background-size: contain;
+        /* iPad 手機用完整圖 */
         background-position: top center;
     }
 }
 
-header{
+header {
     height: 20%;
     background-color: transparent;
 }
 
-.logo-container{
+.logo-container {
     display: flex;
     height: 100%;
     width: 50%;
 }
+
 #logo {
     /*max-height: 20%;*/
     margin-top: 15px;
     height: 60px;
 }
-.logo-text{
+
+.logo-text {
     margin-top: 6%;
     margin-right: 10px;
     font-size: 40px;
     color: rgb(0, 0, 0);
     font-family: "Ma Shan Zheng", cursive;
-} 
+}
 
-.fa-trash{
+.fa-trash {
     position: absolute;
     right: 10%;
     top: 8%;
@@ -52,7 +56,7 @@ header{
     opacity: 0.7;
 }
 
-.fa-bars{
+.fa-bars {
     position: absolute;
     right: 5%;
     top: 8%;
@@ -63,20 +67,24 @@ header{
 
 
 .slide-show {
-    width: 80%;           /* 你原本的設定 */
+    width: 80%;
+    /* 你原本的設定 */
     max-width: 900px;
-    aspect-ratio: 16 / 9; /* ✅ 新增 */
+    aspect-ratio: 16 / 9;
+    /* ✅ 新增 */
     margin: 180px auto 50px auto;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    border-radius: 15px; /* 可以加圓角更柔和 */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3); /* 小陰影增加質感 */
+    border-radius: 15px;
+    /* 可以加圓角更柔和 */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    /* 小陰影增加質感 */
 }
 
-.slides-images{
+.slides-images {
     position: relative;
     width: 100%;
     height: 100%;
@@ -90,9 +98,10 @@ header{
     object-position: center;
     opacity: 0;
     transition: opacity 0.8s ease;
-    object-fit: contain; /* 完整顯示，不裁切 */
-        border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    object-fit: contain;
+    /* 完整顯示，不裁切 */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: opacity 0.8s ease, transform 0.5s ease;
 }
 
@@ -103,31 +112,31 @@ header{
 
 /* 圓點切換 */
 .index-images {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 10;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
 }
 
 .index-item {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: rgba(255,255,255,0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .index-item.active {
-  background-color: rgba(255,255,255,0.9);
-  transform: scale(1.2);
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.2);
 }
 
 .index-item:hover {
-  transform: scale(1.3);
+    transform: scale(1.3);
 }
 
 
@@ -138,23 +147,31 @@ header{
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;   /* ✅ 整體真正置中 */
-    transform: none;       /* ❌ 拿掉 translateX */
+    align-items: center;
+    /* ✅ 整體真正置中 */
+    transform: none;
+    /* ❌ 拿掉 translateX */
 }
 
 /* 每一列 */
 .box1,
-.box2{
+.box2 {
     display: flex;
-    justify-content: center;  /* 每列置中 */
-    flex-wrap: wrap;          /* 螢幕小時自動換行 */
-    margin-bottom: 20px;      /* 每列之間距離 */
+    justify-content: center;
+    /* 每列置中 */
+    flex-wrap: wrap;
+    /* 螢幕小時自動換行 */
+    margin-bottom: 20px;
+    /* 每列之間距離 */
 }
+
 .box3 {
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;   /* ❗重點：不允許換行 */
-    gap: 20px;           /* 三個之間距離 */
+    flex-wrap: nowrap;
+    /* ❗重點：不允許換行 */
+    gap: 20px;
+    /* 三個之間距離 */
 }
 
 
@@ -195,7 +212,8 @@ header{
 /* 文字 */
 .caption {
     position: absolute;
-    top: -20px;                 /* ✅ 往上移，不壓到圖 */
+    top: -20px;
+    /* ✅ 往上移，不壓到圖 */
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.55);
@@ -226,7 +244,7 @@ header{
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 .go-game-content {
@@ -239,7 +257,7 @@ header{
     font-size: 32px;
     margin-bottom: 15px;
     color: #fff;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .go-game-section p {
@@ -247,74 +265,352 @@ header{
     font-size: 16px;
     margin-bottom: 25px;
     color: #fff;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .go-game-btn {
     display: inline-block;
-    padding: 18px 48px; /* 放大按鈕 */
-    background: linear-gradient(135deg, #00c6ff, #0072ff); /* 漸層色 */
+    padding: 18px 48px;
+    /* 放大按鈕 */
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    /* 漸層色 */
     color: white;
-    font-size: 20px; /* 放大文字 */
+    font-size: 20px;
+    /* 放大文字 */
     border-radius: 16px;
     text-decoration: none;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     animation: floatBtn 3s ease-in-out infinite;
 }
 
 .go-game-btn:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
-    background: linear-gradient(135deg, #00e0ff, #005ce6); /* 漸層加強 */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    background: linear-gradient(135deg, #00e0ff, #005ce6);
+    /* 漸層加強 */
 }
+
 /* 浮動動畫 */
 @keyframes floatBtn {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
 }
+
 .soda {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	perspective: 50vw;
-	transform: translateZ(-99999px);
-	transform-style: preserve-3d;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    perspective: 50vw;
+    transform: translateZ(-99999px);
+    transform-style: preserve-3d;
     pointer-events: none;
 }
 
 .bubble {
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	background-image: radial-gradient(rgba(255, 255, 255, 0.3) 60%, rgba(255, 255, 255, 1) 80%);
-	transform: translateX(-50%);
-	will-change: top, left;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.3) 60%, rgba(255, 255, 255, 1) 80%);
+    transform: translateX(-50%);
+    will-change: top, left;
 }
 
 .bubble::after {
-	content: '';
-	position: absolute;
-	top: 20%;
-	right: 25%;
-	width: 33%;
-	height: 33%;
-	border: 3px solid;
-	border-color: rgba(255, 255, 255, 0.8) transparent transparent transparent;
-	border-radius: 50%;
-	transform: rotate(45deg);
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 25%;
+    width: 33%;
+    height: 33%;
+    border: 3px solid;
+    border-color: rgba(255, 255, 255, 0.8) transparent transparent transparent;
+    border-radius: 50%;
+    transform: rotate(45deg);
 }
+
 /* 滾動浮現動畫 */
 .fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
 }
 
 .fade-up.show {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================
+   全域防止橫向卷軸
+========================= */
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* 避免任何元素超出 */
+* {
+    max-width: 100%;
+}
+
+/* =========================
+   Logo（跟海好有你同風格）
+========================= */
+
+#logo-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    z-index: 9999;
+}
+
+#logo-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#logo-text {
+    font-family: "LXGW WenKai Mono TC", monospace;
+    font-size: 42px;
+    font-weight: 700;
+    color: white;
+
+    text-shadow:
+        2px 2px 0 #8A99DE,
+        3px 3px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   平板 RWD
+========================= */
+
+@media screen and (max-width: 1024px) {
+
+    body {
+        min-height: 100vh;
+
+        background-image: url(./ppp2.jpg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    #logo-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    #logo-text {
+        font-size: 34px;
+    }
+
+    .slide-show {
+        width: 92%;
+    }
+
+    .image {
+        width: 420px;
+    }
+     .box1,
+    .box2,
+    .box3 {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .image {
+        width: 45%;
+        max-width: 380px;
+        height: auto;
+    }
+
+    /* 取消你原本的位移 */
+    .box2 .image:nth-child(1),
+    .box2 .image:nth-child(2) {
+        transform: none;
+    }
+}
+
+/* =========================
+   手機 RWD
+========================= */
+
+@media screen and (max-width: 768px) {
+
+    body {
+        background-attachment: scroll;
+    }
+
+    body {
+        min-height: 100vh;
+
+        background-image: url(./ppp2.jpg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    /* ===== Logo ===== */
+
+    #logo-container {
+        top: 14px;
+        left: 14px;
+        gap: 10px;
+    }
+
+    #logo-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    #logo-text {
+        font-size: 26px;
+    }
+
+    /* ===== 漢堡按鈕 ===== */
+
+    .ui-top {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 9999;
+    }
+
+    /* ===== slideshow ===== */
+
+    .slide-show {
+
+        width: 94%;
+
+        margin-top: 120px;
+
+        border-radius: 16px;
+    }
+
+    .index-images {
+        bottom: 10px;
+    }
+
+    .index-item {
+        width: 10px;
+        height: 10px;
+    }
+
+    /* ===== 卡片 ===== */
+
+     .box1,
+    .box2,
+    .box3 {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .image {
+        width: 80%;        /* 原本 90% → 再縮小 */
+        max-width: 320px;  /* 原本 420px → 改小 */
+        height: auto;
+    }
+
+    .image img {
+        width: 100%;
+        height: auto;
+        transform: none;
+    }
+
+    .caption {
+        font-size: 12px;   /* 文字也一起縮 */
+        line-height: 1.6;
+        padding: 10px;
+    }
+
+    /* 取消所有位移 */
+    .box2 .image:nth-child(1),
+    .box2 .image:nth-child(2) {
+        transform: none;
+    }
+
+    /* ===== GAME 區 ===== */
+
+    .go-game-section {
+
+        padding: 30px 18px;
+    }
+
+    .go-game-section h2 {
+
+        font-size: 24px;
+    }
+
+    .go-game-section p {
+
+        font-size: 14px;
+    }
+
+    .go-game-btn {
+
+        width: 100%;
+
+        padding: 16px 20px;
+
+        font-size: 18px;
+    }
+}
+
+/* =========================
+   超小手機
+========================= */
+
+@media screen and (max-width: 480px) {
+
+    body {
+        min-height: 100vh;
+
+        background-image: url(./ppp2.jpg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    #logo-text {
+        font-size: 22px;
+    }
+
+    .slide-show {
+        margin-top: 110px;
+    }
+
+    .go-game-section h2 {
+        font-size: 20px;
+    }
+
+    .go-game-btn {
+        font-size: 16px;
+    }
+
+    .caption {
+        font-size: 13px;
+        line-height: 1.7;
+    }
 }

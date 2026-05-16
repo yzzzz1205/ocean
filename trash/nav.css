@@ -226,10 +226,13 @@
     font-weight: bold;
     color: #ffffff;
     position: relative;
-    display: block;         
-    padding: 12px 20px;          /* 增加上下高度 */
-    background: rgba(255, 255, 255, 0.25); /* 半透明白底，稍微更明顯 */
-    border-radius: 10px;           /* 跟 hover 圓角統一 */
+    display: block;
+    padding: 12px 20px;
+    /* 增加上下高度 */
+    background: rgba(255, 255, 255, 0.25);
+    /* 半透明白底，稍微更明顯 */
+    border-radius: 10px;
+    /* 跟 hover 圓角統一 */
     transition: all 0.3s;
     z-index: 1;
 }
@@ -240,12 +243,15 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 8px;                      /* 彩條更粗 */
-    height: 100%;                   
-    background: linear-gradient(180deg, #00d4ff, #0059ff); /* 顏色更飽和 */
+    width: 8px;
+    /* 彩條更粗 */
+    height: 100%;
+    background: linear-gradient(180deg, #00d4ff, #0059ff);
+    /* 顏色更飽和 */
     border-radius: 0 4px 4px 0;
     z-index: 2;
 }
+
 /* icon 大小 */
 .menu-icon {
     width: 22px;
@@ -254,14 +260,99 @@
     flex-shrink: 0;
 
     position: relative;
-    top: 5px;   /* ⬅️ 往下 1～3px，自行微調 */
+    top: 5px;
+    /* ⬅️ 往下 1～3px，自行微調 */
     right: 5px;
 }
 
 .side-menu ul li a.active .menu-icon {
     filter: brightness(1.4);
 }
+
 .side-menu ul li a:hover .menu-icon {
     transform: scale(1.1);
     transition: transform 0.2s ease;
+}
+
+@media screen and (max-width: 1024px) {
+
+    #logo-text {
+        font-size: 38px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    #logo-container {
+        top: 16px;
+        left: 16px;
+        gap: 10px;
+    }
+
+    #logo-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    #logo-text {
+        font-size: 28px;
+    }
+
+    /* 右上角menu */
+    .ui-top {
+        top: 12px;
+        right: 12px;
+    }
+
+    .glass-btn {
+        width: 52px;
+        height: 52px;
+    }
+
+    .hamburger span {
+        width: 22px;
+    }
+
+    .hamburger span:nth-child(1) {
+        top: 16px;
+    }
+
+    .hamburger span:nth-child(2) {
+        top: 25px;
+    }
+
+    .hamburger span:nth-child(3) {
+        top: 34px;
+    }
+
+    .hamburger.active span:nth-child(1),
+    .hamburger.active span:nth-child(3) {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-50%) rotate(-45deg);
+    }
+
+    /* 側邊menu */
+    .side-menu {
+        width: 220px;
+        padding-top: 90px;
+    }
+
+    .side-menu ul li {
+        font-size: 17px;
+        padding: 10px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    #logo-text {
+        font-size: 22px;
+    }
+
 }
