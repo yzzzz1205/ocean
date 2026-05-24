@@ -868,6 +868,25 @@ button,
         height: 38px;
         font-size: 13px;
     }
+
+    /* 1. 調整 main 的頂部間距，讓標題往上移 */
+    main {
+        padding-top: 100px;
+        /* 將原來的 140px 縮小到 80px */
+    }
+
+    /* 2. 調整 .word1 容器本身，讓它靠近左邊緣 */
+    .word1 {
+        margin-left: 15px;
+        /* 將原來的 35px 縮小到 15px */
+    }
+
+    /* 3. 調整標題字體大小 */
+    .word1 h1 {
+        font-size: 1.5rem;
+        margin-left: 0;
+        /* 這裡歸零，因為 .word1 本身已經處理好縮排了 */
+    }
 }
 
 /* =========================
@@ -905,6 +924,20 @@ button,
     .car {
         font-size: 12px;
         letter-spacing: 0.12em;
+    }
+
+    main {
+        padding-top: 100px;
+        /* 更小的螢幕再往上移一點 */
+    }
+
+    .word1 {
+        margin-left: 15px;
+        /* 貼近邊緣 */
+    }
+
+    .word1 h1 {
+        font-size: 1.25rem;
     }
 }
 
