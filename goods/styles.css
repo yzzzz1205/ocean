@@ -41,11 +41,12 @@ main {
     margin: 0 auto;
 
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* 將 250px 改為 230px，確保 5 欄可以容納在 1400px 的寬度內 */
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     gap: 40px 35px;
 
     justify-items: center;
-    padding: 40px 30px 40px;
+    padding: 40px 30px;
 }
 
 .box {
@@ -823,35 +824,27 @@ main {
 
 
 /* 確保所有按鈕與互動元件字體至少 16px (iOS 不會自動放大) */
-button, .car, .carousel-button {
-    font-size: 16px !important; 
-}
-
-/* 3. 核心響應式佈局 (這段會自動處理 5 欄 -> 4 -> 3 -> 2 -> 1) */
-.product-grid {
-    display: grid;
-    /* 這裡設定每個卡片寬度至少 250px，自動填滿剩餘空間，最大自動對齊 */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px 35px;
-    width: 100%;
-    max-width: 1400px; /* 限制最大寬度，當螢幕超過此寬度，最多就維持 5 欄左右 */
-    margin: 0 auto;
-    padding: 40px 30px;
-    justify-items: center; /* 讓內容置中 */
+button,
+.car,
+.carousel-button {
+    font-size: 16px !important;
 }
 
 /* 4. 手機版與平板版微調 */
 @media (max-width: 768px) {
     .product-grid {
-        grid-template-columns: repeat(2, 1fr); /* 手機維持 2 欄 */
+        grid-template-columns: repeat(2, 1fr);
+        /* 手機維持 2 欄 */
         gap: 16px;
         padding: 16px;
     }
-    
-.box {
+
+    .box {
         width: 100%;
-        height: auto;           /* 改為自動高度 */
-        padding-bottom: 20px;    /* 用 padding 取代 min-height，保留底部呼吸空間 */
+        height: auto;
+        /* 改為自動高度 */
+        padding-bottom: 20px;
+        /* 用 padding 取代 min-height，保留底部呼吸空間 */
         border-radius: 16px;
     }
 
@@ -888,9 +881,12 @@ button, .car, .carousel-button {
         gap: 12px;
         padding: 12px;
     }
-.box {
-        height: auto;           /* 改為自動高度 */
-        padding-bottom: 16px;    /* 縮小一點 padding */
+
+    .box {
+        height: auto;
+        /* 改為自動高度 */
+        padding-bottom: 16px;
+        /* 縮小一點 padding */
         border-radius: 14px;
     }
 
