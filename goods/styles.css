@@ -825,14 +825,26 @@ main {
 * {
     box-sizing: border-box;
 }
+/* 在全域樣式加入 */
+html, body {
+    touch-action: manipulation; /* 停用雙擊縮放 */
+}
 
+/* 確保所有按鈕與互動元件字體至少 16px (iOS 不會自動放大) */
+button, .car, .carousel-button {
+    font-size: 16px !important; 
+}
 /* =========================
    🖥️ 桌機（維持原本）
    ========================= */
+/* 修改這一段，讓 grid 自動適應 */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 40px 35px;
+    /* 最小寬度設為 200px，若空間足夠則自動填滿 1fr (等比例空間) */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px; /* 根據需求調整間距 */
+    padding: 20px;
+    width: 100%;
 }
 
 @media (min-width: 1025px) {
